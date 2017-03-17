@@ -1,19 +1,23 @@
 package ntou.soselab.movie.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import ntou.soselab.movie.controller.dto.ServiceTestDTO;
 import ntou.soselab.movie.model.User;
 import ntou.soselab.movie.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 public class ServiceTestController {
     @Autowired
     UserRepository userRepository;
 
     @PostMapping("/serviceTest")
-    public void serviceTest(ServiceTestDTO serviceTestDTO) {
+    public void serviceTest(@RequestBody ServiceTestDTO serviceTestDTO) {
+        log.info("{}", serviceTestDTO);
         if (serviceTestDTO.getState().equals("The user, Ben, is exists")) {
             this.setBen();
         }
