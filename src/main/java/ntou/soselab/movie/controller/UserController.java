@@ -4,6 +4,8 @@ import ntou.soselab.movie.model.User;
 import ntou.soselab.movie.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
 
@@ -19,8 +21,10 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public void registration(@RequestBody User user){
+    public User registration(@RequestBody User user){
+        user.setId(UUID.randomUUID().toString());
         userRepository.save(user);
+        return user;
     }
 
 }
